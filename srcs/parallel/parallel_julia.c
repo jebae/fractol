@@ -9,7 +9,7 @@ static int		set_kernel_arg(cl_kernel kernel,\
 		sizeof(cl_mem), mem) == CLHELPER_FAIL)
 		return (FRACTOL_FAIL);
 	if (clh_set_kernel_arg(kernel, 1,\
-		sizeof(t_complex), render_helper->z) == CLHELPER_FAIL)
+		sizeof(t_complex), &(render_helper->z)) == CLHELPER_FAIL)
 		return (FRACTOL_FAIL);
 	if (clh_set_kernel_arg(kernel, 2,\
 		sizeof(t_complex), render_helper->c) == CLHELPER_FAIL)

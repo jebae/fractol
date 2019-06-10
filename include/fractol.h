@@ -16,8 +16,7 @@
 # define BLUE					0x0000FF
 # define GREEN					0x00FF00
 
-# define MLX_BPP				32
-# define MLX_ENDIAN				0
+# define NUM_COLOR_CTRL_POINT	6
 
 # define NUM_CL_KERNELS			3
 # define NUM_CL_MEMS			1
@@ -36,10 +35,10 @@ typedef struct		s_coord_helper
 
 typedef struct		s_render_helper
 {
-	t_complex		*z;
+	t_complex		z;
 	t_complex		*c;
 	float			delta;
-	int				(*iteration)(t_complex, t_complex);
+	int				(*iteration)(t_complex, t_complex, t_palette *palette);
 }					t_render_helper;
 
 /*
@@ -52,18 +51,19 @@ t_coord_helper		init_coord_helper();
 */
 void				render_fractal(t_render_helper *render_helper,\
 	t_marker *marker);
-void				render_mandelbrot(t_complex z, float delta,\
+void				render_mandelbrot(t_coord_helper *coord_helper, t_clhelper *clhelper,\
 	t_marker *marker);
-void				render_julia(t_complex z, t_complex *c, float delta,\
-	t_marker *marker);
-void				render_burning_ship(t_complex z, float delta,\
+void				render_julia(t_coord_helper *coord_helper, t_clhelper *clhelper,\
+	t_marker *marker, t_complex *c);
+void				render_burning_ship(t_coord_helper *coord_helper, t_clhelper *clhelper,\
 	t_marker *marker);
 
 /*
 ** calc
 */
-int					mandelbrot_iteration(t_complex z, t_complex c);
-int					burning_ship_iteration(t_complex z, t_complex c);
+int					mandelbrot_iteration(t_complex z, t_complex c, t_palette *palette);
+int					burning_ship_iteration(t_complex z, t_complex c, t_palette *palette);
+float				get_color(t_palette *palette, float abs_value, int n);
 
 /*
 ** parallel
