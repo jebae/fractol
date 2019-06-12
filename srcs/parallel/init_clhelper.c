@@ -7,23 +7,29 @@ static int			create_buffer(t_clhelper *clhelper)
 	clhelper->mems = (cl_mem *)ft_memalloc(\
 		sizeof(cl_mem) * NUM_CL_MEMS);
 	args.context = clhelper->context;
+	args.host_ptr = NULL;
 	args.flags = CL_MEM_WRITE_ONLY;
 	args.size = sizeof(int) * WIDTH * HEIGHT;
-	args.host_ptr = NULL;
-	return (clh_create_buffer(&(clhelper->mems[0]), &args));
+	if (clh_create_buffer(&(clhelper->mems[0]), &args) == CLHELPER_FAIL)
+		return (FRACTOL_FAIL);
+	args.flags = CL_MEM_READ_ONLY;
+	args.size = sizeof(t_color) * NUM_COLOR_CTRL_POINT;
+	if (clh_create_buffer(&(clhelper->mems[1]), &args) == CLHELPER_FAIL)
+		return (FRACTOL_FAIL);
+	return (FRACTOL_SUCCESS);
 }
 
 static int			create_kernels(t_clhelper *clhelper)
 {
 	clhelper->kernels = (cl_kernel *)ft_memalloc(\
 		sizeof(cl_kernel) * NUM_CL_KERNELS);
-	if (clh_create_kernel(&(clhelper->kernels[KERNEL_MANDELBROT]),\
+	if (clh_create_kernel(&(clhelper->kernels[MANDELBROT]),\
 		clhelper->program, "mandelbrot") == CLHELPER_FAIL)
 		return (FRACTOL_FAIL);
-	if (clh_create_kernel(&(clhelper->kernels[KERNEL_JULIA]),\
+	if (clh_create_kernel(&(clhelper->kernels[JULIA]),\
 		clhelper->program, "julia") == CLHELPER_FAIL)
 		return (FRACTOL_FAIL);
-	if (clh_create_kernel(&(clhelper->kernels[KERNEL_BURNING_SHIP]),\
+	if (clh_create_kernel(&(clhelper->kernels[BURNING_SHIP]),\
 		clhelper->program, "burning_ship") == CLHELPER_FAIL)
 		return (FRACTOL_FAIL);
 	return (FRACTOL_SUCCESS);
@@ -40,14 +46,14 @@ int					init_clhelper(t_clhelper *clhelper,\
 {
 	char			*src;
 
-	if (clh_set_device(clhelper, CL_DEVICE_TYPE_GPU) == CLHELPER_FAIL)
+	if (clh_set_device(clhelper, CL_DEVICE_TYPE_CPU) == CLHELPER_FAIL)
 		return (handle_fail(src));
 	clh_get_device_info(clhelper);
 	if (clh_create_context(clhelper) == CLHELPER_FAIL)
 		return (handle_fail(src));
 	if (clh_create_cmd_queues(clhelper) == CLHELPER_FAIL)
 		return (handle_fail(src));
-	if (create_buffer(clhelper) == CLHELPER_FAIL)
+	if (create_buffer(clhelper) == FRACTOL_FAIL)
 		return (handle_fail(src));
 	src = clh_concat_kernel_src(kernel_srcs, num_kernel_files);
 	if (clh_create_program(&(clhelper->program),\

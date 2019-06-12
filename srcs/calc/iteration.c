@@ -3,9 +3,9 @@
 int			mandelbrot_iteration(t_complex z, t_complex c, t_palette *palette)
 {
 	int			i;
-	float		aa;
-	float		bb;
-	float		two_ab;
+	double		aa;
+	double		bb;
+	double		two_ab;
 
 	i = 0;
 	while (i < MAX_ITERATION)
@@ -25,9 +25,9 @@ int			mandelbrot_iteration(t_complex z, t_complex c, t_palette *palette)
 int			burning_ship_iteration(t_complex z, t_complex c, t_palette *palette)
 {
 	int			i;
-	float		aa;
-	float		bb;
-	float		two_ab;
+	double		aa;
+	double		bb;
+	double		two_ab;
 
 	i = 0;
 	while (i < MAX_ITERATION)

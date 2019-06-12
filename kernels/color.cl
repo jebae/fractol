@@ -1,12 +1,13 @@
-float		get_mu(float abs_value, int n)
+double		get_mu(double abs_value, int n)
 {
 	return ((n + 2 - log2(log(abs_value))) / MAX_ITERATION);
 }
 
-int			calc_rgb(float mu, int i, int j)
+int			calc_rgb(double mu, int i, int j,\
+	__global uchar3 *color_scheme)
 {
 	int			color = 0;
-	float		alpha;
+	double		alpha;
 
 	alpha = (mu - color_ctrl_point[i]) /\
 		(color_ctrl_point[j] - color_ctrl_point[i]);
@@ -21,16 +22,17 @@ int			calc_rgb(float mu, int i, int j)
 	return (color);
 }
 
-int			get_color(float abs_value, int n)
+int			get_color(double abs_value, int n,\
+	__global uchar3 *color_scheme)
 {
 	int		i;
-	float	mu = get_mu(abs_value, n);
+	double	mu = get_mu(abs_value, n);
 
 	i = 0;
 	while (i < NUM_COLOR_CTRL_POINT)
 	{
 		if (mu >= color_ctrl_point[i] && mu < color_ctrl_point[i + 1])
-			return (calc_rgb(mu, i, i + 1));
+			return (calc_rgb(mu, i, i + 1, color_scheme));
 		i++;
 	}
 	return (BLACK);

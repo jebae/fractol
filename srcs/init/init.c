@@ -1,12 +1,12 @@
 #include "fractol.h"
 
-static void			init_width_height(float *width, float *height)
+static void			init_width_height(double *width, double *height)
 {
 	*width = 5;
 	*height = (*width * HEIGHT) / WIDTH;
 }
 
-static t_complex	init_entry_point(float width, float height)
+static t_complex	init_entry_point(double width, double height)
 {
 	t_complex	p;
 
@@ -15,7 +15,7 @@ static t_complex	init_entry_point(float width, float height)
 	return (p);
 }
 
-static float		init_delta(float width)
+static double		init_delta(double width)
 {
 	return (width / WIDTH);
 }
@@ -29,4 +29,21 @@ t_coord_helper		init_coord_helper()
 		coord_helper.width, coord_helper.height);
 	coord_helper.delta = init_delta(coord_helper.width);
 	return (coord_helper);
+}
+
+void				init_mlx(t_dispatcher *dispatcher)
+{
+	t_marker	*marker;
+
+	marker = &(dispatcher->marker);
+    marker->p_mlx = mlx_init();
+    marker->p_win = mlx_new_window(marker->p_mlx, WIDTH, HEIGHT, "fractol");
+    marker->p_img = mlx_new_image(marker->p_mlx, WIDTH, HEIGHT);
+	dispatcher->palette_type = PALETTE_B;
+	marker->palette = (t_palette *)ft_memalloc(sizeof(t_palette));
+    *(marker->palette) = fractal_palette_blue();
+	mlx_hook(marker->p_win, MOUSE_EVENT, MOUSE_MASK,\
+		&event_mouse_move, (void *)dispatcher);
+	mlx_key_hook(marker->p_win, &event_keypress, dispatcher);
+	mlx_mouse_hook(marker->p_win, &event_zoom, dispatcher);
 }

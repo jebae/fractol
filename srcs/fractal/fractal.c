@@ -3,7 +3,7 @@
 static void			fill_img(int *img, t_render_helper *render_helper, t_palette *palette)
 {
 	int			color;
-	float		entry_x;
+	double		entry_x;
 	int			x;
 	int			y;
 
@@ -32,7 +32,7 @@ void				render_fractal(t_render_helper *render_helper,\
 	int		*img_buf;
 
 	img_buf = (int *)get_img_buffer(marker->p_img);
-	fill_img(img_buf, render_helper, &(marker->palette));
+	fill_img(img_buf, render_helper, marker->palette);
 	mlx_put_image_to_window(marker->p_mlx, marker->p_win, marker->p_img,\
 		0, 0);
 }
