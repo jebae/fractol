@@ -39,6 +39,7 @@ void				init_mlx(t_dispatcher *dispatcher)
     marker->p_mlx = mlx_init();
     marker->p_win = mlx_new_window(marker->p_mlx, WIDTH, HEIGHT, "fractol");
     marker->p_img = mlx_new_image(marker->p_mlx, WIDTH, HEIGHT);
+	marker->mark_pixel = &mark_pixel;
 	dispatcher->palette_type = PALETTE_B;
 	marker->palette = (t_palette *)ft_memalloc(sizeof(t_palette));
     *(marker->palette) = fractal_palette_blue();

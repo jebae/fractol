@@ -11,7 +11,6 @@ static void		change_palette(t_dispatcher *dispatcher,\
 	marker = &(dispatcher->marker);
     delete_color_scheme(marker->palette);
     *(marker->palette) = f();
-	dispatcher->render(dispatcher);
 }
 
 void		event_palette_red(t_dispatcher *dispatcher)

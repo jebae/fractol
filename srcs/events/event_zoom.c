@@ -24,5 +24,6 @@ int			event_zoom(int key, int x, int y, void *param)
 	coord_helper->entry_point = complex_coord_zoom(&args);
 	coord_helper->delta = coord_helper->width / WIDTH;
 	dispatcher->render(dispatcher);
+	render_board(dispatcher);
 	return (0);
 }

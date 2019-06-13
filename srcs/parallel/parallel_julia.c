@@ -21,7 +21,7 @@ static int		set_kernel_arg(cl_kernel kernel,\
 		sizeof(int), &width) == CLHELPER_FAIL)
 		return (FRACTOL_FAIL);
 	if (clh_set_kernel_arg(kernel, 5,\
-		sizeof(cl_mem), &(mem[1])) == CLHELPER_FAIL)
+		sizeof(int), &(render_helper->palette_type)) == CLHELPER_FAIL)
 		return (FRACTOL_FAIL);
 	return (FRACTOL_SUCCESS);
 }
@@ -32,5 +32,5 @@ void			parallel_render_julia(t_clhelper *clhelper,\
 	if (set_kernel_arg(clhelper->kernels[JULIA],\
 		clhelper->mems, render_helper) == FRACTOL_FAIL)
 		return ;
-	parallel_render(JULIA, clhelper, render_helper, marker);
+	parallel_render(JULIA, clhelper, marker);
 }

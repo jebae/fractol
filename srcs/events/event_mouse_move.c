@@ -17,5 +17,6 @@ int		event_mouse_move(int x, int y, void *param)
 		entry_point->i + delta * y
 	};
 	dispatcher->render(dispatcher);
+	render_board(dispatcher);
 	return (0);
 }

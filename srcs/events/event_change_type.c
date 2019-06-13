@@ -4,10 +4,7 @@ static void		change_if_different(t_dispatcher *dispatcher,\
 	void (*render)(t_dispatcher *))
 {
 	if (dispatcher->render != render)
-	{
 		dispatcher->render = render;
-		dispatcher->render(dispatcher);
-	}
 	return ;
 }
 

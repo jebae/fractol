@@ -4,7 +4,7 @@ double		get_mu(double abs_value, int n)
 }
 
 int			calc_rgb(double mu, int i, int j,\
-	__global uchar3 *color_scheme)
+	__constant uchar3 *color_scheme)
 {
 	int			color = 0;
 	double		alpha;
@@ -23,7 +23,7 @@ int			calc_rgb(double mu, int i, int j,\
 }
 
 int			get_color(double abs_value, int n,\
-	__global uchar3 *color_scheme)
+	__constant uchar3 *color_scheme)
 {
 	int		i;
 	double	mu = get_mu(abs_value, n);

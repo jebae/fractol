@@ -1,5 +1,5 @@
 int			mandelbrot_iteration(double2 z, double2 c,\
-	__global uchar3 *color_scheme)
+	__constant uchar3 *color_scheme)
 {
 	int			i;
 	double		aa;
@@ -22,7 +22,7 @@ int			mandelbrot_iteration(double2 z, double2 c,\
 }
 
 int			burning_ship_iteration(double2 z, double2 c,\
-	__global uchar3 *color_scheme)
+	__constant uchar3 *color_scheme)
 {
 	int			i;
 	double		aa;

@@ -6,7 +6,6 @@ static void		event_translate_left(t_dispatcher *dispatcher)
 
 	coord_helper = &(dispatcher->coord_helper);
 	coord_helper->entry_point.r -= coord_helper->delta * 10;
-	dispatcher->render(dispatcher);
 }
 
 static void		event_translate_right(t_dispatcher *dispatcher)
@@ -15,7 +14,6 @@ static void		event_translate_right(t_dispatcher *dispatcher)
 
 	coord_helper = &(dispatcher->coord_helper);
 	coord_helper->entry_point.r += coord_helper->delta * 10;
-	dispatcher->render(dispatcher);
 }
 
 static void		event_translate_up(t_dispatcher *dispatcher)
@@ -24,7 +22,6 @@ static void		event_translate_up(t_dispatcher *dispatcher)
 
 	coord_helper = &(dispatcher->coord_helper);
 	coord_helper->entry_point.i -= coord_helper->delta * 10;
-	dispatcher->render(dispatcher);
 }
 
 static void		event_translate_down(t_dispatcher *dispatcher)
@@ -33,7 +30,6 @@ static void		event_translate_down(t_dispatcher *dispatcher)
 
 	coord_helper = &(dispatcher->coord_helper);
 	coord_helper->entry_point.i += coord_helper->delta * 10;
-	dispatcher->render(dispatcher);
 }
 
 void			event_translate(int keycode, t_dispatcher *dispatcher)

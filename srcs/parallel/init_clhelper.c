@@ -10,13 +10,7 @@ static int			create_buffer(t_clhelper *clhelper)
 	args.host_ptr = NULL;
 	args.flags = CL_MEM_WRITE_ONLY;
 	args.size = sizeof(int) * WIDTH * HEIGHT;
-	if (clh_create_buffer(&(clhelper->mems[0]), &args) == CLHELPER_FAIL)
-		return (FRACTOL_FAIL);
-	args.flags = CL_MEM_READ_ONLY;
-	args.size = sizeof(t_color) * NUM_COLOR_CTRL_POINT;
-	if (clh_create_buffer(&(clhelper->mems[1]), &args) == CLHELPER_FAIL)
-		return (FRACTOL_FAIL);
-	return (FRACTOL_SUCCESS);
+	return (clh_create_buffer(&(clhelper->mems[0]), &args));
 }
 
 static int			create_kernels(t_clhelper *clhelper)
@@ -46,6 +40,7 @@ int					init_clhelper(t_clhelper *clhelper,\
 {
 	char			*src;
 
+	src = NULL;
 	if (clh_set_device(clhelper, CL_DEVICE_TYPE_CPU) == CLHELPER_FAIL)
 		return (handle_fail(src));
 	clh_get_device_info(clhelper);
@@ -53,7 +48,7 @@ int					init_clhelper(t_clhelper *clhelper,\
 		return (handle_fail(src));
 	if (clh_create_cmd_queues(clhelper) == CLHELPER_FAIL)
 		return (handle_fail(src));
-	if (create_buffer(clhelper) == FRACTOL_FAIL)
+	if (create_buffer(clhelper) == CLHELPER_FAIL)
 		return (handle_fail(src));
 	src = clh_concat_kernel_src(kernel_srcs, num_kernel_files);
 	if (clh_create_program(&(clhelper->program),\

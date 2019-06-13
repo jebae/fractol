@@ -33,15 +33,15 @@
 # define ZOOM_SCALE				1.05
 
 # define BLACK					0x000000
-# define WHITE					0xFFFFFF
 # define RED					0xFF0000
-# define BLUE					0x0000FF
 # define GREEN					0x00FF00
+# define SKYBLUE				0x87CEEB
+# define YELLOW					0xFFFF00
 
 # define NUM_COLOR_CTRL_POINT	6
 
 # define NUM_CL_KERNELS			3
-# define NUM_CL_MEMS			2
+# define NUM_CL_MEMS			1
 
 # define MANDELBROT				0
 # define JULIA					1
@@ -61,6 +61,7 @@ typedef struct		s_coord_helper
 
 typedef struct		s_render_helper
 {
+	int				palette_type;
 	t_complex		z;
 	t_complex		*c;
 	double			delta;
@@ -101,6 +102,14 @@ void				event_palette_blue(t_dispatcher *dispatcher);
 void				event_exit(t_dispatcher *dispatcher);
 
 /*
+** board
+*/
+void				render_board(t_dispatcher *dispatcher);
+void				render_usage(void *p_mlx, void *p_win);
+void				render_status(t_dispatcher *dispatcher);
+void				render_color_scheme(t_marker *marker, t_coord *offset);
+
+/*
 ** fractal
 */
 void				render_fractal(t_render_helper *render_helper,\
@@ -129,7 +138,7 @@ int					enqueue_read_buffer(cl_command_queue cmd_queue,\
 int					enqueue_write_color_scheme(cl_command_queue cmd_queue,\
 	cl_mem mem, t_color *color_scheme);
 void				parallel_render(int fractal_name, t_clhelper *clhelper,\
-	t_render_helper *render_helper, t_marker *marker);
+	t_marker *marker);
 void				parallel_render_mandelbrot(t_clhelper *clhelper,\
 	t_render_helper *render_helper, t_marker *marker);
 void				parallel_render_julia(t_clhelper *clhelper,\

@@ -1,5 +1,5 @@
 __kernel void		burning_ship(__global int *out,\
-	double2 entry, double delta, int width, __global uchar3 *color_scheme)
+	double2 entry, double delta, int width, int palette_type)
 {
 	int			idx = get_global_id(0);
 	int			r = idx % width;
@@ -8,5 +8,5 @@ __kernel void		burning_ship(__global int *out,\
 
 	z.x = entry.x + delta * r;
 	z.y = entry.y + delta * i;
-	out[idx] = burning_ship_iteration(z, z, color_scheme);
+	out[idx] = burning_ship_iteration(z, z, color_schemes[palette_type]);
 }

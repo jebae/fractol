@@ -21,5 +21,7 @@ int		event_keypress(int keycode, void *param)
 		event_palette_green(dispatcher);
 	else if (keycode == KEY_B)
 		event_palette_blue(dispatcher);
+	dispatcher->render(dispatcher);
+	render_board(dispatcher);
 	return (0);
 }

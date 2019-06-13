@@ -16,21 +16,6 @@ int			enqueue_ndrange_kernel(\
 	return (FRACTOL_SUCCESS);
 }
 
-int			enqueue_write_color_scheme(cl_command_queue cmd_queue,\
-	cl_mem mem, t_color *color_scheme)
-{
-	t_enqueue_buffer_args		args;
-
-	args.cmd_queue = cmd_queue;
-	args.mem = mem;
-	args.offset = 0;
-	args.size = sizeof(*color_scheme) * NUM_COLOR_CTRL_POINT;
-	args.host_buf = color_scheme;
-	if (clh_enqueue_write_buffer(&args) == CLHELPER_FAIL)
-		return (FRACTOL_FAIL);
-	return (FRACTOL_SUCCESS);
-}
-
 int			enqueue_read_buffer(cl_command_queue cmd_queue,\
 	cl_mem mem, int *host_buf)
 {
@@ -47,14 +32,11 @@ int			enqueue_read_buffer(cl_command_queue cmd_queue,\
 }
 
 void		parallel_render(int fractal_name, t_clhelper *clhelper,\
-	t_render_helper *render_helper, t_marker *marker)
+	t_marker *marker)
 {
 	int		*host_buf;
 
 	host_buf = (int *)get_img_buffer(marker->p_img);
-	if (enqueue_write_color_scheme(clhelper->cmd_queues[0],\
-		clhelper->mems[1], marker->palette->color_scheme) == FRACTOL_FAIL)
-		return ;
 	if (enqueue_ndrange_kernel(clhelper->cmd_queues[0],\
 		clhelper->kernels[fractal_name]) == FRACTOL_FAIL)
 		return ;
