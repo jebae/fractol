@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jebae <marvin@42.fr>                       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/06/17 14:41:22 by jebae             #+#    #+#             */
+/*   Updated: 2019/06/17 14:42:45 by jebae            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "fractol.h"
 
-int		handle_wrong_arg()
+int		handle_wrong_arg(void)
 {
 	put_color_str(KRED, "Wrong argument\n");
 	put_color_str(KGRN,\
@@ -29,17 +41,17 @@ int		check_arg(char *arg, t_dispatcher *dispatcher)
 	return (FRACTOL_FAIL);
 }
 
-int     main(int argc, char **args)
+int		main(int argc, char **args)
 {
 	t_dispatcher				dispatcher;
-    static char					*kernel_srcs[] = {
-        "kernels/header.cl",
-        "kernels/color.cl",
-        "kernels/iteration.cl",
-        "kernels/mandelbrot.cl",
-        "kernels/burning_ship.cl",
-        "kernels/julia.cl"
-    };
+	static char					*kernel_srcs[] = {
+		"kernels/header.cl",
+		"kernels/color.cl",
+		"kernels/iteration.cl",
+		"kernels/mandelbrot.cl",
+		"kernels/burning_ship.cl",
+		"kernels/julia.cl"
+	};
 
 	if (argc != 2 || check_arg(args[1], &dispatcher) == FRACTOL_FAIL)
 		return (handle_wrong_arg());

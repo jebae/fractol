@@ -1,9 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   fractol.h                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jebae <marvin@42.fr>                       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/06/17 14:36:07 by jebae             #+#    #+#             */
+/*   Updated: 2019/06/17 14:36:08 by jebae            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef FRACTOL_H
 # define FRACTOL_H
 
 # include "draw.h"
 # include "clhelper.h"
-# include <stdio.h> // remove after
 
 # define FRACTOL_SUCCESS		1
 # define FRACTOL_FAIL			-1
@@ -121,8 +132,10 @@ void				render_burning_ship(t_dispatcher *dispatcher);
 /*
 ** calc
 */
-int					mandelbrot_iteration(t_complex z, t_complex c, t_palette *palette);
-int					burning_ship_iteration(t_complex z, t_complex c, t_palette *palette);
+int					mandelbrot_iteration(t_complex z, t_complex c,\
+	t_palette *palette);
+int					burning_ship_iteration(t_complex z, t_complex c,\
+	t_palette *palette);
 int					get_color(t_palette *palette, double abs_value, int n);
 
 /*

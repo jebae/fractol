@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   init.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jebae <marvin@42.fr>                       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/06/17 14:40:35 by jebae             #+#    #+#             */
+/*   Updated: 2019/06/17 14:40:35 by jebae            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "fractol.h"
 
 static void			init_width_height(double *width, double *height)
@@ -20,7 +32,7 @@ static double		init_delta(double width)
 	return (width / WIDTH);
 }
 
-t_coord_helper		init_coord_helper()
+t_coord_helper		init_coord_helper(void)
 {
 	t_coord_helper		coord_helper;
 
@@ -36,13 +48,13 @@ void				init_mlx(t_dispatcher *dispatcher)
 	t_marker	*marker;
 
 	marker = &(dispatcher->marker);
-    marker->p_mlx = mlx_init();
-    marker->p_win = mlx_new_window(marker->p_mlx, WIDTH, HEIGHT, "fractol");
-    marker->p_img = mlx_new_image(marker->p_mlx, WIDTH, HEIGHT);
+	marker->p_mlx = mlx_init();
+	marker->p_win = mlx_new_window(marker->p_mlx, WIDTH, HEIGHT, "fractol");
+	marker->p_img = mlx_new_image(marker->p_mlx, WIDTH, HEIGHT);
 	marker->mark_pixel = &mark_pixel;
 	dispatcher->palette_type = PALETTE_B;
 	marker->palette = (t_palette *)ft_memalloc(sizeof(t_palette));
-    *(marker->palette) = fractal_palette_blue();
+	*(marker->palette) = fractal_palette_blue();
 	mlx_hook(marker->p_win, MOUSE_EVENT, MOUSE_MASK,\
 		&event_mouse_move, (void *)dispatcher);
 	mlx_key_hook(marker->p_win, &event_keypress, dispatcher);

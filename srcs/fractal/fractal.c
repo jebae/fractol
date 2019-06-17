@@ -1,6 +1,19 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   fractal.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jebae <marvin@42.fr>                       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/06/17 14:39:21 by jebae             #+#    #+#             */
+/*   Updated: 2019/06/17 14:39:22 by jebae            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "fractol.h"
 
-static void			fill_img(int *img, t_render_helper *render_helper, t_palette *palette)
+static void			fill_img(int *img, t_render_helper *render_helper,\
+	t_palette *palette)
 {
 	int			color;
 	double		entry_x;
