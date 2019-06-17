@@ -41,7 +41,7 @@ int					init_clhelper(t_clhelper *clhelper,\
 	char			*src;
 
 	src = NULL;
-	if (clh_set_device(clhelper, CL_DEVICE_TYPE_GPU) == CLHELPER_FAIL)
+	if (clh_set_device(clhelper, CL_DEVICE_TYPE_CPU) == CLHELPER_FAIL)
 		return (handle_fail(src));
 	clh_get_device_info(clhelper);
 	if (clh_create_context(clhelper) == CLHELPER_FAIL)
