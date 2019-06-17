@@ -4,5 +4,6 @@
 *.out
 dumbmain.c
 .vscode
-graphics
 fractol
+*.o
+*.a
