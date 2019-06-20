@@ -58,7 +58,7 @@ int		main(int argc, char **args)
 	dispatcher.is_parallel = 0;
 	dispatcher.julia_effect = 0;
 	dispatcher.coord_helper = init_coord_helper();
-	init_clhelper(&(dispatcher.clhelper), (char **)kernel_srcs,\
+	init_clkit(&(dispatcher.clkit), (char **)kernel_srcs,\
 		sizeof(kernel_srcs) / sizeof(char *));
 	init_mlx(&dispatcher);
 	dispatcher.render(&dispatcher);

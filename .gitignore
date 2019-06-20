@@ -7,3 +7,5 @@ dumbmain.c
 fractol
 *.o
 *.a
+objs
+.DS_Store

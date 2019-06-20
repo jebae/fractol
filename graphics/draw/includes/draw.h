@@ -6,18 +6,19 @@
 /*   By: jebae <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/28 15:09:14 by jebae             #+#    #+#             */
-/*   Updated: 2019/06/17 14:52:02 by jebae            ###   ########.fr       */
+/*   Updated: 2019/06/10 16:35:49 by jebae            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef DRAW_H
 # define DRAW_H
+
 # include <math.h>
 # include <mlx.h>
 # include "libft.h"
 # include "gmath.h"
-# define WIDTH			2000
-# define HEIGHT			1200
+# define WIDTH			1000
+# define HEIGHT			800
 # define PADDING		30
 # define MLX_BPP		32
 # define MLX_ENDIAN		0
@@ -62,7 +63,7 @@ typedef struct			s_marker
 	float				(*calculate_z)(int, int, t_polygon_coefficient *);
 	int					(*mark_pixel)(struct s_marker *, t_coord *,\
 			t_polygon_coefficient *);
-	float				*z_buf;
+	float				z_buf[HEIGHT][WIDTH];
 }						t_marker;
 
 /*
@@ -113,8 +114,8 @@ void					init_z_buffer(float *z_buf);
 */
 int						pick_color(t_palette *palette, double mu);
 void					delete_color_scheme(t_palette *palette);
-t_palette				fractal_palette_red(void);
-t_palette				fractal_palette_green(void);
-t_palette				fractal_palette_blue(void);
+t_palette				fractal_palette_red();
+t_palette				fractal_palette_green();
+t_palette				fractal_palette_blue();
 
 #endif

@@ -14,7 +14,7 @@
 
 void		event_exit(t_dispatcher *dispatcher)
 {
-	clear_clhelper(&(dispatcher->clhelper));
+	clear_clkit(&(dispatcher->clkit));
 	delete_color_scheme(dispatcher->marker.palette);
 	ft_memdel((void **)&(dispatcher->marker.palette));
 	mlx_destroy_image(dispatcher->marker.p_mlx, dispatcher->marker.p_img);

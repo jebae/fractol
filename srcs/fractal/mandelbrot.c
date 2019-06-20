@@ -21,7 +21,7 @@ void		render_mandelbrot(t_dispatcher *dispatcher)
 	render_helper.delta = dispatcher->coord_helper.delta;
 	render_helper.palette_type = dispatcher->palette_type;
 	if (dispatcher->is_parallel == 1)
-		parallel_render_mandelbrot(&(dispatcher->clhelper),\
+		parallel_render_mandelbrot(&(dispatcher->clkit),\
 			&render_helper, &(dispatcher->marker));
 	else
 	{
