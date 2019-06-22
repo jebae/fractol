@@ -6,13 +6,13 @@
 /*   By: jebae <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/17 14:41:22 by jebae             #+#    #+#             */
-/*   Updated: 2019/06/17 14:42:45 by jebae            ###   ########.fr       */
+/*   Updated: 2019/06/22 16:26:04 by jebae            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-int		handle_wrong_arg(void)
+static int		handle_wrong_arg(void)
 {
 	put_color_str(KRED, "Wrong argument\n");
 	put_color_str(KGRN,\
@@ -20,7 +20,7 @@ int		handle_wrong_arg(void)
 	return (FRACTOL_FAIL);
 }
 
-int		check_arg(char *arg, t_dispatcher *dispatcher)
+static int		check_arg(char *arg, t_dispatcher *dispatcher)
 {
 	if (ft_strcmp(arg, "m") == 0)
 	{
@@ -41,7 +41,7 @@ int		check_arg(char *arg, t_dispatcher *dispatcher)
 	return (FRACTOL_FAIL);
 }
 
-int		main(int argc, char **args)
+int				main(int argc, char **args)
 {
 	t_dispatcher				dispatcher;
 	static char					*kernel_srcs[] = {
@@ -55,7 +55,7 @@ int		main(int argc, char **args)
 
 	if (argc != 2 || check_arg(args[1], &dispatcher) == FRACTOL_FAIL)
 		return (handle_wrong_arg());
-	dispatcher.is_parallel = 0;
+	dispatcher.is_parallel = 1;
 	dispatcher.julia_effect = 0;
 	dispatcher.coord_helper = init_coord_helper();
 	init_clkit(&(dispatcher.clkit), (char **)kernel_srcs,\
